@@ -1,59 +1,66 @@
 # VoiceChanger — женский голос (w-okada VCClient)
 
-Готовая сборка [w-okada/voice-changer](https://github.com/w-okada/voice-changer) **2.0.78-beta (CUDA)** с женскими RVC-моделями и безопасным скриптом запуска. Работает локально, без интернета и подписок.
+Готовая сборка [w-okada/voice-changer](https://github.com/w-okada/voice-changer) **2.0.78-beta (CUDA)** с женскими RVC-голосами и **своим простым интерфейсом**. Работает локально, без интернета и подписок.
 
 ## Требования
 - Windows 10/11 x64
-- Видеокарта **NVIDIA** (RTX 20xx и новее, от 6 ГБ видеопамяти). На AMD и встроенной графике эта сборка не заработает.
+- Видеокарта **NVIDIA** (RTX 20xx и новее, от 6 ГБ видеопамяти), драйвер **570 или новее**. На AMD и встроенной графике сборка не заработает.
 - Около 20 ГБ свободного места
 - [7-Zip](https://www.7-zip.org/) для распаковки
 
 ## Установка
-1. Скачай **все** части `VoiceChanger-female.7z.001`, `.002` и т. д. со страницы [Releases](../../releases) в одну папку.
-2. Открой `.001` в 7-Zip и распакуй. Путь должен быть **без кириллицы и пробелов**, например `C:\VoiceChanger`.
-3. Установи VB-Audio Virtual Cable. Скачай `VBCABLE_Driver_Pack45.zip` из того же [релиза](../../releases) (это оригинальный пакет без изменений) или с [официального сайта](https://vb-audio.com/Cable/). Распакуй, запусти `VBCABLE_Setup_x64.exe` **от имени администратора**, нажми *Install Driver* и **перезагрузи ПК**.
-4. Запусти `dist\main\start_safe.bat`. Если появится SmartScreen: «Подробнее» → «Выполнить в любом случае».
+1. Скачай **все** части `VoiceChanger-female-v1.1.7z.001`, `.002` и т. д. со страницы [Releases](../../releases) в одну папку.
+2. Открой **`.001`** (именно первую часть) в 7-Zip и распакуй. Путь должен быть **без кириллицы**, например `C:\VoiceChanger`.
+3. Установи VB-Audio Virtual Cable. Скачай `VBCABLE_Driver_Pack45.zip` из того же [релиза](../../releases) (оригинальный пакет без изменений) или с [официального сайта](https://vb-audio.com/Cable/). Распакуй, запусти `VBCABLE_Setup_x64.exe` **от имени администратора**, нажми *Install Driver* и **перезагрузи ПК**.
+4. Запусти **`dist\main\VoiceChanger.vbs`**: откроется окно программы без консоли. Удобно сделать ярлык на рабочий стол: правой кнопкой → «Отправить» → «Рабочий стол».
+   Если появится SmartScreen: «Подробнее» → «Выполнить в любом случае».
 
-## Настройка
-В окне программы:
+## Как пользоваться
+1. Слева выбери **голос**. Начни с **RU Female**.
+2. **Микрофон**: твой микрофон. **Куда выводить**: `CABLE Input (VB-Audio Virtual Cable)`.
+3. **Слышать себя**: наушники, если хочешь слышать результат.
+4. Нажми **«Включить голос»**.
+5. В **Telegram / Discord / играх** выбери микрофоном `CABLE Output (VB-Audio Virtual Cable)`.
 
-| Параметр | Значение |
+| Настройка | Что делает |
 |---|---|
-| ГПУ | твоя NVIDIA |
-| Голос (слот) | начни с **RU Female** |
-| Тон | +12 (если голос «бурундучий», ставь +8…+10) |
-| Фрагмент | 8192–12000 |
-| Дополнительно | 16384 или больше |
-| Усиление выход | 1 |
-| Шумовой гейт | −50…−60 |
-| Шумоподавление | подавление1 + подавление2 |
-| вход | твой микрофон |
-| выход | `CABLE Input (VB-Audio Virtual Cable)` |
-| монитор | наушники (чтобы слышать себя) |
+| Тон | Высота голоса. Мужской → женский: **+10…+12** |
+| Сходство с голосом модели | Насколько тембр похож на модель. **0.5–0.7**. Работает только у голосов с индексом |
+| Качество и задержка | Видеокарта, размер фрагмента, контекст, шумовой гейт, усиление. Если звук роботный, увеличь «Контекст для модели» |
 
-Нажми **Старт**.
+«Классический вид» (ссылка справа вверху) открывает оригинальный интерфейс программы со всеми функциями.
 
-**Telegram / Discord / игры:** выбери микрофоном `CABLE Output (VB-Audio Virtual Cable)`.
+## Добавить свой голос
+**«+ Добавить»** над списком голосов → файл модели `.pth` → файл индекса `added_…_v2.index` (если есть) → «Загрузить». Голос встанет в свободный слот с тоном +12.
+
+- Файлы `trained_…index` — пустые заготовки. Окно само это распознает и загрузит голос без индекса.
+- **Загружай модели только из проверенных источников**: `.pth` может содержать вредоносный код. Проверить файл можно через [picklescan](https://github.com/mmaitre314/picklescan): `python -m picklescan -p папка_с_моделью`.
 
 ## Голоса в сборке
-| Слот | Имя | Источник |
-|---|---|---|
-| 5–7 | Female p249 / p262 / p340 | [Nekochu/RVC-VCTK_Voice-sample](https://huggingface.co/Nekochu/RVC-VCTK_Voice-sample), Apache-2.0 |
-| 8 | RU Female | [Razer112/Public_Models](https://huggingface.co/Razer112/Public_Models) (OriginalRU), OpenRAIL |
-| 9 | Female EN | [Razer112/Public_Models](https://huggingface.co/Razer112/Public_Models) (Female), OpenRAIL |
-| 10 | E-Woman EN | [Razer112/Public_Models](https://huggingface.co/Razer112/Public_Models) (E-Woman), OpenRAIL |
+| Слот | Имя | Индекс | Источник |
+|---|---|---|---|
+| 5–7 | Female p249 / p262 / p340 | есть | [Nekochu/RVC-VCTK_Voice-sample](https://huggingface.co/Nekochu/RVC-VCTK_Voice-sample), Apache-2.0 |
+| 8 | RU Female | нет | [Razer112/Public_Models](https://huggingface.co/Razer112/Public_Models) (OriginalRU), OpenRAIL |
+| 9 | Female EN | нет | [Razer112/Public_Models](https://huggingface.co/Razer112/Public_Models) (Female), OpenRAIL |
+| 10 | E-Woman EN | нет | [Razer112/Public_Models](https://huggingface.co/Razer112/Public_Models) (E-Woman), OpenRAIL |
 
-Встроенные японские голоса и Beatrice-модели автора программы убраны. При первом запуске программа может сама докачать демо-голоса.
+Встроенные японские голоса и Beatrice-модели автора программы убраны.
 
 ## Безопасность
 - Сборка скачана с официального [Hugging Face wok000/vcclient000](https://huggingface.co/wok000/vcclient000), SHA256 архива сверен: `1ca9151005ab64658cfc4bf40f845008d2543abe7ff67db2da9d6889f07f7ae0`.
-- Все `.pth`-модели проверены [picklescan](https://github.com/mmaitre314/picklescan), угроз нет.
-- `start_safe.bat` запускает сервер только на `127.0.0.1` (штатные `start_http*.bat` открывают его для всей локальной сети). У программы есть [известная уязвимость](https://github.com/w-okada/voice-changer/issues/1114), поэтому **закрывай её, когда не пользуешься**.
-- Добавляешь свои модели? Проверяй `.pth` через picklescan: такой файл может содержать исполняемый код.
+- Все `.pth`-модели проверены picklescan, угроз нет.
+- Сервер слушает только `127.0.0.1`. Штатные `start_http*.bat` открывают его для всей локальной сети, их не используй. У программы есть [известная уязвимость](https://github.com/w-okada/voice-changer/issues/1114), поэтому **закрывай программу, когда не пользуешься**.
+
+## Что изменено относительно оригинала
+- `web_front/index.html`, `app.js`, `app.css`: новый интерфейс (серверный режим, REST + Socket.IO). Оригинал сохранён как `web_front/classic.html`.
+- `_internal/native_client/resources/app/main.js`: окно 1000×820, без меню, сброс кэша.
+- `VoiceChanger.vbs` и `start_safe.bat`: запуск без консоли, только на `127.0.0.1`, сброс `ELECTRON_RUN_AS_NODE`.
 
 ## Известные баги сборки 2.0.78-beta
-- Если окно не открывается и сервер сразу закрывается, в системе задана переменная `ELECTRON_RUN_AS_NODE`. `start_safe.bat` её сбрасывает.
-- Конвертация файлов через API падает (ошибка `Timer ... enable`), в реальном времени всё работает.
+- Если окно не открывается и программа сразу закрывается, в системе задана переменная `ELECTRON_RUN_AS_NODE`. Запуск через `VoiceChanger.vbs` / `start_safe.bat` её сбрасывает.
+- Конвертация файлов через API падает (`Timer ... enable`), в реальном времени всё работает.
 
 ## Лицензии
-Программа распространяется под лицензией MIT (© Wataru Okada и соавторы), см. [LICENSE](LICENSE). Лицензии моделей указаны в таблице выше. **VB-CABLE** — программа VB-Audio, лежит в релизе в оригинальном виде. Источник: [www.vb-cable.com](https://www.vb-cable.com). VB-CABLE is a donationware, all participations are welcome. Если пригодился, [поддержи автора](https://vb-audio.com/Cable/).
+Программа распространяется под лицензией MIT (© Wataru Okada и соавторы), см. [LICENSE](LICENSE). Клиент Socket.IO — MIT. Лицензии моделей указаны в таблице выше.
+
+**VB-CABLE** — программа VB-Audio, лежит в релизе в оригинальном виде. Источник: [www.vb-cable.com](https://www.vb-cable.com). VB-CABLE is a donationware, all participations are welcome. Если пригодился, [поддержи автора](https://vb-audio.com/Cable/).
