@@ -11,7 +11,7 @@
 ## Установка
 1. Скачай **все** части `VoiceChanger-female.7z.001`, `.002` и т. д. со страницы [Releases](../../releases) в одну папку.
 2. Открой `.001` в 7-Zip и распакуй. Путь должен быть **без кириллицы и пробелов**, например `C:\VoiceChanger`.
-3. Установи [VB-Audio Virtual Cable](https://vb-audio.com/Cable/): распакуй архив, запусти `VBCABLE_Setup_x64.exe` **от имени администратора**, нажми *Install Driver* и **перезагрузи ПК**.
+3. Установи VB-Audio Virtual Cable. Скачай `VBCABLE_Driver_Pack45.zip` из того же [релиза](../../releases) (это оригинальный пакет без изменений) или с [официального сайта](https://vb-audio.com/Cable/). Распакуй, запусти `VBCABLE_Setup_x64.exe` **от имени администратора**, нажми *Install Driver* и **перезагрузи ПК**.
 4. Запусти `dist\main\start_safe.bat`. Если появится SmartScreen: «Подробнее» → «Выполнить в любом случае».
 
 ## Настройка
@@ -56,4 +56,4 @@
 - Конвертация файлов через API падает (ошибка `Timer ... enable`), в реальном времени всё работает.
 
 ## Лицензии
-Программа распространяется под лицензией MIT (© Wataru Okada и соавторы), см. [LICENSE](LICENSE). Лицензии моделей указаны в таблице выше. VB-Cable в сборку не входит: это donationware от VB-Audio, скачивай его с официального сайта.
+Программа распространяется под лицензией MIT (© Wataru Okada и соавторы), см. [LICENSE](LICENSE). Лицензии моделей указаны в таблице выше. **VB-CABLE** — программа VB-Audio, лежит в релизе в оригинальном виде. Источник: [www.vb-cable.com](https://www.vb-cable.com). VB-CABLE is a donationware, all participations are welcome. Если пригодился, [поддержи автора](https://vb-audio.com/Cable/).
